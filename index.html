@@ -22,13 +22,20 @@
 <body>
 
     <nav>
-        <a href="index.html" class="active" data-i18n="home">الرئيسية</a>
-        <a href="features.html" data-i18n="features">مميزات الرتب</a>
-        <a href="rules.html" data-i18n="rules">القوانين</a>
-        <a href="team.html" data-i18n="team">المطورين</a>
-        <a href="contact.html" data-i18n="contact">تواصل معنا</a>
-        <a href="privacy.html" data-i18n="privacy">الخصوصية</a>
-        <a href="reviews.html" data-i18n="reviews">آراء العملاء</a>
+        <button class="menu-toggle" onclick="toggleMobileMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <div class="nav-links" id="navLinks">
+            <a href="index.html" class="active" data-i18n="home">الرئيسية</a>
+            <a href="features.html" data-i18n="features">مميزات الرتب</a>
+            <a href="rules.html" data-i18n="rules">القوانين</a>
+            <a href="team.html" data-i18n="team">المطورين</a>
+            <a href="contact.html" data-i18n="contact">تواصل معنا</a>
+            <a href="privacy.html" data-i18n="privacy">الخصوصية</a>
+            <a href="reviews.html" data-i18n="reviews">آراء العملاء</a>
+        </div>
         <button id="langBtn" class="lang-btn" onclick="changeLanguage()">EN</button>
         <div id="userMenuContainer"></div>
     </nav>

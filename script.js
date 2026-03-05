@@ -116,4 +116,74 @@ window.addEventListener('load', function() {
     if (typeof updateUserUI === 'function') {
         updateUserUI();
     }
+    // Enable touch scroll for navbar
+    initNavbarScroll();
+});
+
+// Enable smooth horizontal scroll for navbar on mobile
+function initNavbarScroll() {
+    const nav = document.querySelector('nav');
+    if (!nav) return;
+    
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+    
+    nav.addEventListener('mousedown', (e) => {
+        isDown = true;
+        startX = e.pageX - nav.offsetLeft;
+        scrollLeft = nav.scrollLeft;
+    });
+    
+    nav.addEventListener('mouseleave', () => {
+        isDown = false;
+    });
+    
+    nav.addEventListener('mouseup', () => {
+        isDown = false;
+    });
+    
+    nav.addEventListener('mousemove', (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - nav.offsetLeft;
+        const walk = (x - startX) * 2;
+        nav.scrollLeft = scrollLeft - walk;
+    });
+    
+    // Touch events for mobile
+    nav.addEventListener('touchstart', (e) => {
+        startX = e.touches[0].pageX - nav.offsetLeft;
+        scrollLeft = nav.scrollLeft;
+    }, { passive: true });
+    
+    nav.addEventListener('touchmove', (e) => {
+        const x = e.touches[0].pageX - nav.offsetLeft;
+        const walk = (x - startX) * 2;
+        nav.scrollLeft = scrollLeft - walk;
+    }, { passive: true });
+}
+
+// Toggle Mobile Menu
+function toggleMobileMenu() {
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navLinks = document.getElementById('navLinks');
+    
+    if (menuToggle && navLinks) {
+        menuToggle.classList.toggle('active');
+        navLinks.classList.toggle('show');
+    }
+}
+
+// Close mobile menu when clicking on a link
+document.addEventListener('click', function(e) {
+    const navLinks = document.getElementById('navLinks');
+    const menuToggle = document.querySelector('.menu-toggle');
+    
+    if (navLinks && navLinks.classList.contains('show')) {
+        if (!navLinks.contains(e.target) && !menuToggle.contains(e.target)) {
+            navLinks.classList.remove('show');
+            menuToggle.classList.remove('active');
+        }
+    }
 });
