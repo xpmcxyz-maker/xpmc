@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="متجر رتب XPMC - اشتري رتبك واستمتع في السيرفر">
+    <meta name="keywords" content="Minecraft, Server, XPMC, رتب, متجر">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://cdn-icons-png.flaticon.com;">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>XPMC Store</title>
+    <link rel="icon" type="image/png" href="XPMC.png">
+    <link rel="stylesheet" href="style.css">
+    <script src="lang.js"></script>
+    <script src="script.js"></script>
+    <script>loadLanguage();</script>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html" class="active" data-i18n="home">الرئيسية</a>
+        <a href="features.html" data-i18n="features">مميزات الرتب</a>
+        <a href="rules.html" data-i18n="rules">القوانين</a>
+        <a href="team.html" data-i18n="team">المطورين</a>
+        <a href="contact.html" data-i18n="contact">تواصل معنا</a>
+        <a href="privacy.html" data-i18n="privacy">الخصوصية</a>
+    </nav>
+
+    <div class="server-status-bar">
+        <div class="status-item server-status">
+            <span class="status-label" data-i18n="serverStatus">حالة السيرفر:</span>
+            <span class="status-value online" data-i18n="online">🟢 اونلاين</span>
+        </div>
+        <div class="status-item players-count">
+            <span class="status-icon">👥</span>
+            <span class="status-label" data-i18n="playersCount">عدد اللاعبين:</span>
+            <span class="status-value">50</span>
+        </div>
+    </div>
+
+    <header>
+        <img src="XPMC.png" alt="XPMC Logo" class="logo">
+        <h1 data-i18n="buyRank">اشتري رتبتك الآن واستمتع في السيرفر</h1>
+        <p class="tagline" data-i18n="howToBuy">سيتم نقلك الي الديسكورد بعد الشراء وافتح تكت واكتب شراء رتبة</p>
+        <div class="server-info">
+            <div class="ip-box" onclick="copyIP('xpmc.xyz:25565')">
+                <span class="ip-label" data-i18n="javaIP">Java IP</span>
+                <span class="ip-address">xpmc.xyz:25565</span>
+            </div>
+            <div class="ip-box" onclick="copyIP('bedrock.xpmc.xyz:19132')">
+                <span class="ip-label" data-i18n="bedrockIP">Bedrock IP</span>
+                <span class="ip-address">bedrock.xpmc.xyz:19132</span>
+            </div>
+        </div>
+        <p class="how-to-buy" data-i18n="howToBuy">
+            سيتم نقلك الي الديسكورد بعد الشراء وافتح تكت واكتب شراء رتبة
+        </p>
+        <p class="work-time" data-i18n="workTime">
+            ⏰ أوقات العمل: على مدار 24 ساعة
+        </p>
+    </header>
+
+    <section class="lands">
+
+        <div class="card">
+        <h2>🥇MVP</h2>
+        <p class="price">3.99 USD</p>
+        <button onclick="window.open('https://discord.gg/ksceUxcd', '_blank')">Buy</button>
+        </div>
+
+        <div class="card">
+        <h2>🥈VIP</h2>
+        <p class="price">1.99 USD</p>
+        <button onclick="window.open('https://discord.gg/ksceUxcd', '_blank')">Buy</button>
+        </div>
+
+    </section>
+
+    <section class="social-section">
+        <div class="social-item">
+            <h2 data-i18n="youtubeChannel">قناتنا على اليوتيوب</h2>
+            <a href="https://www.youtube.com/@_abdell_" target="_blank">
+                <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube" width="60">
+            </a>
+        </div>
+        <div class="social-item">
+            <h2 data-i18n="discordServer">سيرفر الديسكورد</h2>
+            <a href="https://discord.gg/ksceUxcd" target="_blank">
+                <img src="https://cdn-icons-png.flaticon.com/512/2111/2111370.png" alt="Discord" width="60">
+            </a>
+        </div>
+    </section>
+
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <h2 id="landName"></h2>
+            <p id="landPrice"></p>
+            <input type="text" id="playerName" placeholder="اكتب اسمك في ماين كرافت">
+            <button onclick="confirmPurchase()">تأكيد الشراء</button>
+            <button class="close" onclick="closePopup()">إلغاء</button>
+        </div>
+    </div>
+
+</body>
+</html>
