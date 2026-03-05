@@ -27,6 +27,8 @@
         <a href="team.html" data-i18n="team">المطورين</a>
         <a href="contact.html" data-i18n="contact">تواصل معنا</a>
         <a href="privacy.html" data-i18n="privacy">الخصوصية</a>
+        <a href="reviews.html" data-i18n="reviews">آراء العملاء</a>
+        <button id="langBtn" class="lang-btn" onclick="changeLanguage()">EN</button>
     </nav>
 
     <div class="server-status-bar">
@@ -37,7 +39,7 @@
         <div class="status-item players-count">
             <span class="status-icon">👥</span>
             <span class="status-label" data-i18n="playersCount">عدد اللاعبين:</span>
-            <span class="status-value">50</span>
+            <span class="status-value">25/250</span>
         </div>
     </div>
 
@@ -46,11 +48,11 @@
         <h1 data-i18n="buyRank">اشتري رتبتك الآن واستمتع في السيرفر</h1>
         <p class="tagline" data-i18n="howToBuy">سيتم نقلك الي الديسكورد بعد الشراء وافتح تكت واكتب شراء رتبة</p>
         <div class="server-info">
-            <div class="ip-box" onclick="copyIP('xpmc.xyz:25565')">
+            <div class="ip-box" onclick="copyIP('xpmc.xyz:25565', this)">
                 <span class="ip-label" data-i18n="javaIP">Java IP</span>
                 <span class="ip-address">xpmc.xyz:25565</span>
             </div>
-            <div class="ip-box" onclick="copyIP('bedrock.xpmc.xyz:19132')">
+            <div class="ip-box" onclick="copyIP('bedrock.xpmc.xyz:19132', this)">
                 <span class="ip-label" data-i18n="bedrockIP">Bedrock IP</span>
                 <span class="ip-address">bedrock.xpmc.xyz:19132</span>
             </div>
@@ -63,20 +65,28 @@
         </p>
     </header>
 
-    <section class="lands">
+    <section class="ranks-section">
+        <h2 class="section-title" data-i18n="chooseYourRank">اختر رتبتك</h2>
+        <div class="ranks-container">
+            <div class="rank-card vip">
+                <div class="rank-header">
+                    <span class="rank-name">🥈 <span data-i18n="vipRank">VIP</span></span>
+                    <span class="rank-price">$1.99</span>
+                </div>
+                <img src="VIP.png" alt="VIP" class="rank-image">
+                <button class="buy-btn" onclick="window.open('https://discord.gg/ksceUxcd', '_blank')" data-i18n="buyNow">BUY NOW</button>
+            </div>
 
-        <div class="card">
-        <h2>🥇MVP</h2>
-        <p class="price">3.99 USD</p>
-        <button onclick="window.open('https://discord.gg/ksceUxcd', '_blank')">Buy</button>
+            <div class="rank-card mvp">
+                <div class="rank-header">
+                    <span class="rank-name">🥇 <span data-i18n="mvpRank">MVP</span></span>
+                    <span class="rank-price">$3.99</span>
+                </div>
+                <img src="MVP.png" alt="MVP" class="rank-image">
+                <button class="buy-btn" onclick="window.open('https://discord.gg/ksceUxcd', '_blank')" data-i18n="buyNow">BUY NOW</button>
+            </div>
         </div>
-
-        <div class="card">
-        <h2>🥈VIP</h2>
-        <p class="price">1.99 USD</p>
-        <button onclick="window.open('https://discord.gg/ksceUxcd', '_blank')">Buy</button>
-        </div>
-
+        <p class="view-features"><a href="features.html" data-i18n="viewAllFeatures">شاهد جميع المميزات في صفحة مميزات الرتب</a></p>
     </section>
 
     <section class="social-section">

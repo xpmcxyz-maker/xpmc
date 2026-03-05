@@ -24,6 +24,8 @@
         <a href="team.html" data-i18n="team">المطورين</a>
         <a href="contact.html" data-i18n="contact">تواصل معنا</a>
         <a href="privacy.html" data-i18n="privacy">الخصوصية</a>
+        <a href="reviews.html" data-i18n="reviews">آراء العملاء</a>
+        <button id="langBtn" class="lang-btn" onclick="changeLanguage()">EN</button>
     </nav>
 
     <div class="server-status-bar">
@@ -38,40 +40,46 @@
         </div>
     </div>
 
-    <header>
+    <header class="features-header">
         <h1 data-i18n="featuresTitle">مميزات الرتب 🏅</h1>
     </header>
 
-    <section class="features">
-        <div class="card">
-            <h2>MVP</h2>
-            <ul>
-                <li data-i18n="mvpFly">✅ /fly في كل مكان</li>
-                <li data-i18n="mvpKit">✅ كيت MVP قوي </li>
-                <li data-i18n="mvpHomes">✅ 5 منازل</li>
-                <li data-i18n="mvpColor">✅ لون مميز في الشات</li>
-                <li data-i18n="mvpPerms">✅ صلاحيات إضافية</li>
-                <li>🔨 /anvil - يفتح السندان لإصلاح الأدوات</li>
-                <li>🍗 /feed - ملء شريط الجوع</li>
-                <li>🗑️ /trash - سلة لحذف الأغراض</li>
-                <li>🛠️ /workbench - طاولة الكرافت</li>
-                <li>🗄️ /vault max - الخزنة الكاملة</li>
-            </ul>
-        </div>
+    <section class="ranks-section">
+        <div class="ranks-container">
+            <div class="rank-card mvp">
+                <div class="rank-header">
+                    <span class="rank-name">🥇 <span data-i18n="mvpRank">MVP</span></span>
+                </div>
+                <div class="rank-perks">
+                    <div class="perk"><span class="perk-icon">✓</span> /fly في كل مكان</div>
+                    <div class="perk"><span class="perk-icon">✓</span> كيت MVP قوي</div>
+                    <div class="perk"><span class="perk-icon">✓</span> 5 منازل</div>
+                    <div class="perk"><span class="perk-icon">✓</span> لون مميز في الشات</div>
+                    <div class="perk"><span class="perk-icon">✓</span> صلاحيات إضافية</div>
+                    <div class="perk"><span class="perk-icon">✓</span> /anvil - السندان</div>
+                    <div class="perk"><span class="perk-icon">✓</span> /feed - ملء الجوع</div>
+                    <div class="perk"><span class="perk-icon">✓</span> /trash - سلة المهملات</div>
+                    <div class="perk"><span class="perk-icon">✓</span> /workbench - طاولة الكرافت</div>
+                    <div class="perk"><span class="perk-icon">✓</span> /vault max - الخزنة الكاملة</div>
+                </div>
+            </div>
 
-        <div class="card">
-            <h2>VIP</h2>
-            <ul>
-                <li data-i18n="vipFly">✅ /fly في السبون</li>
-                <li data-i18n="vipKit">✅ كيت VIP </li>
-                <li data-i18n="vipHomes">✅ 2 منازل</li>
-                <li data-i18n="vipPriority">✅ أولوية دخول السيرفر</li>
-                <li data-i18n="vipPrice">✅ سعر خاص في المتجر</li>
-                <li>🔨 /anvil - يفتح السندان لإصلاح الأدوات</li>
-                <li>🍗 /feed - ملء شريط الجوع</li>
-                <li>🗑️ /trash - سلة لحذف الأغراض</li>
-                <li>🛠️ /workbench - طاولة الكرافت</li>
-            </ul>
+            <div class="rank-card vip">
+                <div class="rank-header">
+                    <span class="rank-name">🥈 <span data-i18n="vipRank">VIP</span></span>
+                </div>
+                <div class="rank-perks">
+                    <div class="perk"><span class="perk-icon">✓</span> /fly في السبون</div>
+                    <div class="perk"><span class="perk-icon">✓</span> كيت VIP</div>
+                    <div class="perk"><span class="perk-icon">✓</span> 2 منازل</div>
+                    <div class="perk"><span class="perk-icon">✓</span> أولوية دخول السيرفر</div>
+                    <div class="perk"><span class="perk-icon">✓</span> سعر خاص في المتجر</div>
+                    <div class="perk"><span class="perk-icon">✓</span> /anvil - السندان</div>
+                    <div class="perk"><span class="perk-icon">✓</span> /feed - ملء الجوع</div>
+                    <div class="perk"><span class="perk-icon">✓</span> /trash - سلة المهملات</div>
+                    <div class="perk"><span class="perk-icon">✓</span> /workbench - طاولة الكرافت</div>
+                </div>
+            </div>
         </div>
     </section>
 

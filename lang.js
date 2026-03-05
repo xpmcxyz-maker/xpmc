@@ -18,6 +18,9 @@ const translations = {
         serverStatus: "حالة السيرفر:",
         online: "اونلاين",
         playersCount: "عدد اللاعبين:",
+        copiedSuccess: "✅ تم نسخ IP السيرفر بنجاح!",
+        copiedFail: "❌ فشل نسخ IP السيرفر",
+        copiedLabel: "✓ تم النسخ!",
         
         // Features Page
         featuresTitle: "مميزات الرتب 🏅",
@@ -75,6 +78,15 @@ const translations = {
         siteDeveloper: "مطور الموقع",
         thankYou: "نشكركم على جهدكم ونهضة السيرفر معكم",
         developerCredit: "المطور ",
+        specialThanks: "شكر خاص لـ",
+        thanksForDev: "على تطوير الموقع",
+        reviews: "آراء العملاء",
+        reviewsTitle: "آراء العملاء ⭐",
+        reviewsSubtitle: "شاركنا تجربتك مع السيرفر",
+        addReview: "أضف تقييمك",
+        submitReview: "إرسال التقييم",
+        allReviews: "جميع التقييمات",
+        noReviews: "لا توجد تقييمات بعد. كن أول من يقيّم!",
         
         // Contact Page
         contactTitle: "تواصل معنا 📞",
@@ -109,6 +121,11 @@ const translations = {
         // Social
         youtubeChannel: "قناتنا على اليوتيوب",
         discordServer: "سيرفر الديسكورد",
+        chooseYourRank: "اختر رتبتك",
+        buyNow: "شراء الآن",
+        viewAllFeatures: "شاهد جميع المميزات في صفحة مميزات الرتب",
+        vipRank: "VIP",
+        mvpRank: "MVP",
     },
 
     en: {
@@ -129,6 +146,9 @@ const translations = {
         serverStatus: "Server Status:",
         online: "Online",
         playersCount: "Players:",
+        copiedSuccess: "✅ Server IP copied successfully!",
+        copiedFail: "❌ Failed to copy server IP",
+        copiedLabel: "✓ Copied!",
         
         // Features Page
         featuresTitle: "Rank Features 🏅",
@@ -186,6 +206,15 @@ const translations = {
         siteDeveloper: "Site Developer",
         thankYou: "Thank you for your effort and server's progress with you",
         developerCredit: "Developer ",
+        specialThanks: "Special thanks to",
+        thanksForDev: "for developing the website",
+        reviews: "Reviews",
+        reviewsTitle: "Customer Reviews ⭐",
+        reviewsSubtitle: "Share your experience with the server",
+        addReview: "Add Your Review",
+        submitReview: "Submit Review",
+        allReviews: "All Reviews",
+        noReviews: "No reviews yet. Be the first to rate!",
         
         // Contact Page
         contactTitle: "Contact Us 📞",
@@ -220,6 +249,11 @@ const translations = {
         // Social
         youtubeChannel: "Our YouTube Channel",
         discordServer: "Discord Server",
+        chooseYourRank: "Choose Your Rank",
+        buyNow: "Buy Now",
+        viewAllFeatures: "View all features on Rank Features page",
+        vipRank: "VIP",
+        mvpRank: "MVP",
         
         // Footer
         copyright: "All Rights Reserved © 2024 XPMC Store",

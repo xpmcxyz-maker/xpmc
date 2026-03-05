@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="آراء العملاء - XPMC">
+    <meta name="keywords" content="Minecraft, Server, XPMC, آراء, تقييمات">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://cdn-icons-png.flaticon.com;">
+    <meta name="robots" content="noindex, nofollow">
+    <title>XPMC Store - آراء العملاء</title>
+    <link rel="icon" type="image/png" href="XPMC.png">
+    <link rel="stylesheet" href="style.css">
+    <script src="lang.js"></script>
+    <script src="script.js"></script>
+    <script>loadLanguage();</script>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html" data-i18n="home">الرئيسية</a>
+        <a href="features.html" data-i18n="features">مميزات الرتب</a>
+        <a href="rules.html" data-i18n="rules">القوانين</a>
+        <a href="team.html" data-i18n="team">المطورين</a>
+        <a href="contact.html" data-i18n="contact">تواصل معنا</a>
+        <a href="privacy.html" data-i18n="privacy">الخصوصية</a>
+        <a href="reviews.html" class="active" data-i18n="reviews">آراء العملاء</a>
+        <button id="langBtn" class="lang-btn" onclick="changeLanguage()">EN</button>
+    </nav>
+
+    <div class="server-status-bar">
+        <div class="status-item server-status">
+            <span class="status-label" data-i18n="serverStatus">حالة السيرفر:</span>
+            <span class="status-value online" data-i18n="online">🟢 اونلاين</span>
+        </div>
+        <div class="status-item players-count">
+            <span class="status-icon">👥</span>
+            <span class="status-label" data-i18n="playersCount">عدد اللاعبين:</span>
+            <span class="status-value">50</span>
+        </div>
+    </div>
+
+    <header class="reviews-header">
+        <h1 data-i18n="reviewsTitle">آراء العملاء ⭐</h1>
+        <p data-i18n="reviewsSubtitle">شاركنا تجربتك مع السيرفر</p>
+    </header>
+
+    <section class="add-review-section">
+        <h2 data-i18n="addReview">أضف تقييمك</h2>
+        <form id="reviewForm" onsubmit="submitReview(event)">
+            <input type="text" id="reviewerName" placeholder="اسمك في ماين كرافت" required>
+            <select id="reviewRating">
+                <option value="5">⭐⭐⭐⭐⭐ ممتاز</option>
+                <option value="4">⭐⭐⭐⭐ جيد جداً</option>
+                <option value="3">⭐⭐⭐ جيد</option>
+                <option value="2">⭐⭐ مقبول</option>
+                <option value="1">⭐ ضعيف</option>
+            </select>
+            <textarea id="reviewText" placeholder="اكتب تجربتك هنا..." required></textarea>
+            <button type="submit" class="submit-review-btn" data-i18n="submitReview">إرسال التقييم</button>
+        </form>
+    </section>
+
+    <section class="reviews-section">
+        <h2 data-i18n="allReviews">جميع التقييمات</h2>
+        <div id="reviewsContainer" class="reviews-container">
+            <!-- Reviews will be loaded here -->
+        </div>
+    </section>
+
+    <section class="social-section">
+        <div class="social-item">
+            <h2 data-i18n="youtubeChannel">قناتنا على اليوتيوب</h2>
+            <a href="https://www.youtube.com/@_abdell_" target="_blank">
+                <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube" width="60">
+            </a>
+        </div>
+        <div class="social-item">
+            <h2 data-i18n="discordServer">سيرفر الديسكورد</h2>
+            <a href="https://discord.gg/ksceUxcd" target="_blank">
+                <img src="https://cdn-icons-png.flaticon.com/512/2111/2111370.png" alt="Discord" width="60">
+            </a>
+        </div>
+    </section>
+
+    <script>
+        // Load reviews from localStorage
+        function loadReviews() {
+            const reviews = JSON.parse(localStorage.getItem('xpmcReviews')) || [];
+            const container = document.getElementById('reviewsContainer');
+            
+            if (reviews.length === 0) {
+                container.innerHTML = '<p class="no-reviews" data-i18n="noReviews">لا توجد تقييمات بعد. كن أول من يقيّم!</p>';
+                return;
+            }
+            
+            // Sort by date (newest first)
+            reviews.sort((a, b) => new Date(b.date) - new Date(a.date));
+            
+            container.innerHTML = reviews.map(review => `
+                <div class="review-card">
+                    <div class="review-header">
+                        <span class="reviewer-name">${review.name}</span>
+                        <span class="review-rating">${'⭐'.repeat(review.rating)}</span>
+                    </div>
+                    <p class="review-text">${review.text}</p>
+                    <span class="review-date">${review.date}</span>
+                </div>
+            `).join('');
+        }
+        
+        // Submit new review
+        function submitReview(event) {
+            event.preventDefault();
+            
+            const name = document.getElementById('reviewerName').value;
+            const rating = parseInt(document.getElementById('reviewRating').value);
+            const text = document.getElementById('reviewText').value;
+            
+            const review = {
+                name: name,
+                rating: rating,
+                text: text,
+                date: new Date().toLocaleDateString('ar-SA')
+            };
+            
+            // Get existing reviews
+            const reviews = JSON.parse(localStorage.getItem('xpmcReviews')) || [];
+            reviews.push(review);
+            
+            // Save to localStorage
+            localStorage.setItem('xpmcReviews', JSON.stringify(reviews));
+            
+            // Clear form
+            document.getElementById('reviewForm').reset();
+            
+            // Reload reviews
+            loadReviews();
+            
+            // Show success message
+            alert('✅ تم إرسال تقييمك بنجاح!');
+        }
+        
+        // Load reviews on page load
+        window.addEventListener('load', loadReviews);
+    </script>
+
+</body>
+</html>
