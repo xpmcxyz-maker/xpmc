@@ -968,12 +968,20 @@ input:focus {
         padding: 12px 15px;
         gap: 8px;
         justify-content: flex-start;
+        overflow-x: auto;
+        overflow-y: visible;
+        -webkit-overflow-scrolling: touch;
+        scroll-behavior: smooth;
+        scroll-snap-type: x mandatory;
+        -webkit-scroll-snap-type: x mandatory;
+        position: sticky;
     }
     
     nav a {
         padding: 8px 14px;
         font-size: 12px;
         scroll-snap-align: center;
+        flex-shrink: 0;
     }
     
     .lang-btn {
@@ -981,30 +989,32 @@ input:focus {
         font-size: 11px;
         margin-left: 6px;
         scroll-snap-align: center;
+        flex-shrink: 0;
     }
     
-    /* Scroll hint arrows */
-    nav::after,
-    nav::before {
-        content: '';
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 40px;
-        height: 40px;
-        background: linear-gradient(to right, rgba(0,0,0,0.8), transparent);
-        pointer-events: none;
-        opacity: 0.5;
+    #userMenuContainer {
+        flex-shrink: 0;
     }
     
-    nav::before {
-        left: 0;
-        background: linear-gradient(to right, rgba(0,0,0,0.8), transparent);
+    .user-menu-btn {
+        padding: 6px 10px;
+        font-size: 11px;
+        scroll-snap-align: center;
     }
     
-    nav::after {
-        right: 0;
-        background: linear-gradient(to left, rgba(0,0,0,0.8), transparent);
+    .user-name-display {
+        max-width: 60px;
+    }
+    
+    .login-link {
+        padding: 6px 10px;
+        font-size: 11px;
+        flex-shrink: 0;
+    }
+    
+    /* Scroll hint indicators */
+    .nav-scroll-hint {
+        display: flex;
     }
 }
 
