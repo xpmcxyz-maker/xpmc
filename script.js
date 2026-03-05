@@ -110,4 +110,10 @@ function createParticles() {
 }
 
 // Initialize particles when page loads
-window.addEventListener('load', createParticles);
+window.addEventListener('load', function() {
+    createParticles();
+    // Initialize user UI
+    if (typeof updateUserUI === 'function') {
+        updateUserUI();
+    }
+});

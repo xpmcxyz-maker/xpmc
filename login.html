@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="تسجيل دخول - متجر رتب XPMC">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:;">
+    <title>تسجيل دخول - XPMC Store</title>
+    <link rel="icon" type="image/png" href="XPMC.png">
+    <link rel="stylesheet" href="style.css">
+    <script src="auth.js"></script>
+    <style>
+        /* Login Page Styles */
+        .login-container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .login-back-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 12px 24px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+            border: 2px solid rgba(255, 215, 0, 0.5);
+            border-radius: 25px;
+            color: #FFD700;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .login-back-btn:hover {
+            background: linear-gradient(135deg, #FF8C00, #FFD700);
+            color: #1a1a1a;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 140, 0, 0.4);
+        }
+
+        .login-logo {
+            width: 120px;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0 0 30px rgba(255, 140, 0, 0.6);
+            margin-bottom: 30px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .login-card {
+            background: linear-gradient(145deg, rgba(30, 30, 30, 0.95), rgba(15, 15, 15, 0.98));
+            border: 2px solid rgba(255, 140, 0, 0.4);
+            border-radius: 30px;
+            padding: 40px 50px;
+            max-width: 450px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 40px rgba(255, 140, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .login-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #FF8C00, #FFD700, #FF8C00);
+        }
+
+        .login-title {
+            font-size: 32px;
+            font-weight: 900;
+            color: #FFD700;
+            margin-bottom: 10px;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+        }
+
+        .login-subtitle {
+            font-size: 16px;
+            color: #aaa;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: right;
+        }
+
+        .form-group label {
+            display: block;
+            color: #FFD700;
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid rgba(255, 140, 0, 0.3);
+            border-radius: 15px;
+            background: rgba(0, 0, 0, 0.4);
+            color: white;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #FFD700;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+        }
+
+        .form-group input::placeholder {
+            color: #666;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #FF8C00, #FFD700);
+            border: none;
+            border-radius: 15px;
+            color: #1a1a1a;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 18px;
+            font-weight: 900;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255, 140, 0, 0.5);
+        }
+
+        .login-btn:active {
+            transform: translateY(0);
+        }
+
+        .login-btn:disabled {
+            background: #666;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .message {
+            padding: 12px 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            font-weight: 700;
+            text-align: center;
+            display: none;
+        }
+
+        .message.success {
+            display: block;
+            background: rgba(0, 200, 83, 0.2);
+            border: 2px solid #00c853;
+            color: #00c853;
+        }
+
+        .message.error {
+            display: block;
+            background: rgba(220, 53, 69, 0.2);
+            border: 2px solid #dc3545;
+            color: #dc3545;
+        }
+
+        .register-link {
+            text-align: center;
+            margin-top: 25px;
+            color: #aaa;
+            font-size: 14px;
+        }
+
+        .register-link a {
+            color: #FFD700;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .register-link a:hover {
+            text-decoration: underline;
+        }
+
+        .demo-info {
+            background: rgba(255, 140, 0, 0.1);
+            border: 1px solid rgba(255, 140, 0, 0.3);
+            border-radius: 12px;
+            padding: 15px;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .demo-info h4 {
+            color: #FFD700;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .demo-info p {
+            color: #aaa;
+            font-size: 12px;
+            margin: 5px 0;
+        }
+
+        .demo-info code {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 3px 8px;
+            border-radius: 5px;
+            color: #00FF00;
+        }
+
+        /* Register Form */
+        .register-form {
+            display: none;
+        }
+
+        .register-form.active {
+            display: block;
+        }
+
+        .login-form.hidden {
+            display: none;
+        }
+
+        .switch-form {
+            text-align: center;
+            margin-top: 20px;
+            color: #aaa;
+            font-size: 14px;
+        }
+
+        .switch-form a {
+            color: #FFD700;
+            font-weight: 700;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .switch-form a:hover {
+            text-decoration: underline;
+        }
+
+        /* Discord Support */
+        .discord-support {
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(88, 101, 242, 0.1);
+            border: 1px solid rgba(88, 101, 242, 0.3);
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .discord-support p {
+            color: #aaa;
+            font-size: 13px;
+            margin-bottom: 10px;
+        }
+
+        .discord-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #5865F2, #7289DA);
+            border-radius: 10px;
+            color: white !important;
+            font-size: 14px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .discord-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(88, 101, 242, 0.4);
+            color: white !important;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Tab Switcher */
+        .auth-tabs {
+            display: flex;
+            margin-bottom: 25px;
+            border-bottom: 2px solid rgba(255, 140, 0, 0.3);
+        }
+
+        .auth-tab {
+            flex: 1;
+            padding: 12px;
+            background: none;
+            border: none;
+            color: #aaa;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .auth-tab.active {
+            color: #FFD700;
+        }
+
+        .auth-tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #FF8C00, #FFD700);
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <a href="index.html" class="login-back-btn">
+            ← العودة للرئيسية
+        </a>
+
+        <img src="XPMC.png" alt="XPMC Logo" class="login-logo">
+        
+        <div class="login-card">
+            <h1 class="login-title">🎮 مرحباً بك!</h1>
+            <p class="login-subtitle">سجل دخولك للوصول إلى حسابك</p>
+
+            <!-- Message Container -->
+            <div id="message" class="message"></div>
+
+            <!-- Auth Tabs -->
+            <div class="auth-tabs">
+                <button class="auth-tab active" onclick="switchTab('login')">تسجيل دخول</button>
+                <button class="auth-tab" onclick="switchTab('register')">إنشاء حساب</button>
+            </div>
+
+            <!-- Login Form -->
+            <form class="login-form" id="loginForm" onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label>📧 البريد الإلكتروني</label>
+                    <input type="email" id="loginEmail" placeholder="أدخل بريدك الإلكتروني" required>
+                </div>
+                <div class="form-group">
+                    <label>🔑 كلمة المرور</label>
+                    <input type="password" id="loginPassword" placeholder="أدخل كلمة المرور" required>
+                </div>
+                <button type="submit" class="login-btn">دخول</button>
+            </form>
+
+            <!-- Register Form -->
+            <form class="register-form" id="registerForm" onsubmit="handleRegister(event)">
+                <div class="form-group">
+                    <label>👤 اسم المستخدم</label>
+                    <input type="text" id="regUsername" placeholder="اختر اسماً للمستخدم" required>
+                </div>
+                <div class="form-group">
+                    <label>📧 البريد الإلكتروني</label>
+                    <input type="email" id="regEmail" placeholder="أدخل بريدك الإلكتروني" required>
+                </div>
+                <div class="form-group">
+                    <label>🔑 كلمة المرور</label>
+                    <input type="password" id="regPassword" placeholder="اختر كلمة مرور قوية" required minlength="6">
+                </div>
+                <div class="form-group">
+                    <label>🔑 تأكيد كلمة المرور</label>
+                    <input type="password" id="regConfirmPassword" placeholder="أعد إدخال كلمة المرور" required>
+                </div>
+                <button type="submit" class="login-btn">إنشاء حساب</button>
+            </form>
+
+            <!-- Demo Info -->
+            <div class="demo-info">
+                <h4>ℹ️ معلومات الحسابات التجريبية</h4>
+                <p>البريد: <code>admin@xpmc.xyz</code></p>
+                <p>كلمة المرور: <code>admin123</code></p>
+            </div>
+
+            <!-- Discord Support -->
+            <div class="discord-support">
+                <p>❓ هل واجهتك مشكلة في التسجيل؟</p>
+                <a href="https://discord.gg/ksceUxcd" target="_blank" class="discord-link">
+                    <span>💬</span> تواصل معنا عبر الديسكورد
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Check if already logged in
+        if (isLoggedIn()) {
+            window.location.href = 'index.html';
+        }
+
+        // Switch between login and register forms
+        function switchTab(tab) {
+            const tabs = document.querySelectorAll('.auth-tab');
+            const loginForm = document.getElementById('loginForm');
+            const registerForm = document.getElementById('registerForm');
+            const message = document.getElementById('message');
+            
+            message.className = 'message';
+            message.textContent = '';
+            
+            if (tab === 'login') {
+                tabs[0].classList.add('active');
+                tabs[1].classList.remove('active');
+                loginForm.classList.remove('hidden');
+                registerForm.classList.remove('active');
+            } else {
+                tabs[0].classList.remove('active');
+                tabs[1].classList.add('active');
+                loginForm.classList.add('hidden');
+                registerForm.classList.add('active');
+            }
+        }
+
+        // Handle login
+        function handleLogin(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            const message = document.getElementById('message');
+            
+            const result = login(email, password);
+            
+            if (result.success) {
+                message.className = 'message success';
+                message.textContent = '✅ ' + result.message;
+                
+                // Redirect to main page after 1 second
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 1000);
+            } else {
+                message.className = 'message error';
+                message.textContent = '❌ ' + result.message;
+            }
+        }
+
+        // Handle registration
+        function handleRegister(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('regUsername').value;
+            const email = document.getElementById('regEmail').value;
+            const password = document.getElementById('regPassword').value;
+            const confirmPassword = document.getElementById('regConfirmPassword').value;
+            const message = document.getElementById('message');
+            
+            // Validate passwords match
+            if (password !== confirmPassword) {
+                message.className = 'message error';
+                message.textContent = '❌ كلمات المرور غير متطابقة';
+                return;
+            }
+            
+            // Validate password length
+            if (password.length < 6) {
+                message.className = 'message error';
+                message.textContent = '❌ يجب أن تكون كلمة المرور 6 أحرف على الأقل';
+                return;
+            }
+            
+            const result = register(email, password, username);
+            
+            if (result.success) {
+                message.className = 'message success';
+                message.textContent = '✅ ' + result.message + ' جاري التحويل لتسجيل الدخول...';
+                
+                // Switch to login tab after 2 seconds
+                setTimeout(() => {
+                    switchTab('login');
+                    document.getElementById('loginEmail').value = email;
+                    message.className = 'message success';
+                    message.textContent = '✅ تم إنشاء الحساب! الآن قم بتسجيل الدخول';
+                }, 2000);
+            } else {
+                message.className = 'message error';
+                message.textContent = '❌ ' + result.message;
+            }
+        }
+    </script>
+</body>
+</html>
