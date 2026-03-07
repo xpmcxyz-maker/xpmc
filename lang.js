@@ -126,6 +126,28 @@ const translations = {
         viewAllFeatures: "شاهد جميع المميزات في صفحة مميزات الرتب",
         vipRank: "VIP",
         mvpRank: "MVP",
+        
+        // Login Page
+        backToHome: "العودة للرئيسية",
+        welcomeBack: "مرحباً بك!",
+        loginSubtitle: "سجل دخولك للوصول إلى حسابك",
+        loginTab: "تسجيل دخول",
+        registerTab: "إنشاء حساب",
+        emailLabel: "البريد الإلكتروني",
+        emailPlaceholder: "أدخل بريدك الإلكتروني",
+        passwordLabel: "كلمة المرور",
+        passwordPlaceholder: "أدخل كلمة المرور",
+        confirmPasswordLabel: "تأكيد كلمة المرور",
+        confirmPasswordPlaceholder: "أعد إدخال كلمة المرور",
+        usernameLabel: "اسم المستخدم",
+        usernamePlaceholder: "اختر اسماً للمستخدم",
+        loginButton: "دخول",
+        registerButton: "إنشاء حساب",
+        demoInfoTitle: "معلومات الحسابات التجريبية",
+        demoEmail: "البريد:",
+        demoPassword: "كلمة المرور:",
+        supportTitle: "هل واجهتك مشكلة في التسجيل؟",
+        discordSupport: "تواصل معنا عبر الديسكورد",
     },
 
     en: {
@@ -255,6 +277,28 @@ const translations = {
         vipRank: "VIP",
         mvpRank: "MVP",
         
+        // Login Page
+        backToHome: "Back to Home",
+        welcomeBack: "Welcome Back!",
+        loginSubtitle: "Login to access your account",
+        loginTab: "Login",
+        registerTab: "Register",
+        emailLabel: "Email Address",
+        emailPlaceholder: "Enter your email",
+        passwordLabel: "Password",
+        passwordPlaceholder: "Enter your password",
+        confirmPasswordLabel: "Confirm Password",
+        confirmPasswordPlaceholder: "Re-enter your password",
+        usernameLabel: "Username",
+        usernamePlaceholder: "Choose a username",
+        loginButton: "Login",
+        registerButton: "Register",
+        demoInfoTitle: "Demo Accounts Info",
+        demoEmail: "Email:",
+        demoPassword: "Password:",
+        supportTitle: "Having trouble registering?",
+        discordSupport: "Contact us via Discord",
+        
         // Footer
         copyright: "All Rights Reserved © 2024 XPMC Store",
     }
@@ -274,6 +318,14 @@ function changeLanguage() {
         const key = element.getAttribute('data-i18n');
         if (translations[currentLang][key]) {
             element.textContent = translations[currentLang][key];
+        }
+    });
+    
+    // Update placeholders
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(element => {
+        const key = element.getAttribute('data-i18n-placeholder');
+        if (translations[currentLang][key]) {
+            element.placeholder = translations[currentLang][key];
         }
     });
     
@@ -304,6 +356,14 @@ function loadLanguage() {
             const key = element.getAttribute('data-i18n');
             if (translations[currentLang][key]) {
                 element.textContent = translations[currentLang][key];
+            }
+        });
+        
+        // Update placeholders
+        document.querySelectorAll('[data-i18n-placeholder]').forEach(element => {
+            const key = element.getAttribute('data-i18n-placeholder');
+            if (translations[currentLang][key]) {
+                element.placeholder = translations[currentLang][key];
             }
         });
         

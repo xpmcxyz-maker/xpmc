@@ -9,6 +9,7 @@
     <title>تسجيل دخول - XPMC Store</title>
     <link rel="icon" type="image/png" href="XPMC.png">
     <link rel="stylesheet" href="style.css">
+    <script src="lang.js"></script>
     <script src="auth.js"></script>
     <style>
         /* Login Page Styles */
@@ -340,73 +341,74 @@
         }
     </style>
 </head>
-<body>
+<body onload="loadLanguage()">
     <div class="login-container">
+        <button class="lang-btn" id="langBtn" onclick="changeLanguage()" style="position: absolute; top: 20px; left: 20px; padding: 10px 20px; background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05)); border: 2px solid rgba(255, 215, 0, 0.5); border-radius: 25px; color: #FFD700; font-family: 'Tajawal', sans-serif; font-size: 14px; font-weight: 700; cursor: pointer; transition: all 0.3s ease;">EN</button>
         <a href="index.html" class="login-back-btn">
-            ← العودة للرئيسية
+            ← <span data-i18n="backToHome">العودة للرئيسية</span>
         </a>
 
         <img src="XPMC.png" alt="XPMC Logo" class="login-logo">
         
         <div class="login-card">
-            <h1 class="login-title">🎮 مرحباً بك!</h1>
-            <p class="login-subtitle">سجل دخولك للوصول إلى حسابك</p>
+            <h1 class="login-title">🎮 <span data-i18n="welcomeBack">مرحباً بك!</span></h1>
+            <p class="login-subtitle" data-i18n="loginSubtitle">سجل دخولك للوصول إلى حسابك</p>
 
             <!-- Message Container -->
             <div id="message" class="message"></div>
 
             <!-- Auth Tabs -->
             <div class="auth-tabs">
-                <button class="auth-tab active" onclick="switchTab('login')">تسجيل دخول</button>
-                <button class="auth-tab" onclick="switchTab('register')">إنشاء حساب</button>
+                <button class="auth-tab active" onclick="switchTab('login')" data-i18n="loginTab">تسجيل دخول</button>
+                <button class="auth-tab" onclick="switchTab('register')" data-i18n="registerTab">إنشاء حساب</button>
             </div>
 
             <!-- Login Form -->
             <form class="login-form" id="loginForm" onsubmit="handleLogin(event)">
                 <div class="form-group">
-                    <label>📧 البريد الإلكتروني</label>
-                    <input type="email" id="loginEmail" placeholder="أدخل بريدك الإلكتروني" required>
+                    <label data-i18n="emailLabel">📧 البريد الإلكتروني</label>
+                    <input type="email" id="loginEmail" data-i18n-placeholder="emailPlaceholder" placeholder="أدخل بريدك الإلكتروني" required>
                 </div>
                 <div class="form-group">
-                    <label>🔑 كلمة المرور</label>
-                    <input type="password" id="loginPassword" placeholder="أدخل كلمة المرور" required>
+                    <label data-i18n="passwordLabel">🔑 كلمة المرور</label>
+                    <input type="password" id="loginPassword" data-i18n-placeholder="passwordPlaceholder" placeholder="أدخل كلمة المرور" required>
                 </div>
-                <button type="submit" class="login-btn">دخول</button>
+                <button type="submit" class="login-btn" data-i18n="loginButton">دخول</button>
             </form>
 
             <!-- Register Form -->
             <form class="register-form" id="registerForm" onsubmit="handleRegister(event)">
                 <div class="form-group">
-                    <label>👤 اسم المستخدم</label>
-                    <input type="text" id="regUsername" placeholder="اختر اسماً للمستخدم" required>
+                    <label data-i18n="usernameLabel">👤 اسم المستخدم</label>
+                    <input type="text" id="regUsername" data-i18n-placeholder="usernamePlaceholder" placeholder="اختر اسماً للمستخدم" required>
                 </div>
                 <div class="form-group">
-                    <label>📧 البريد الإلكتروني</label>
-                    <input type="email" id="regEmail" placeholder="أدخل بريدك الإلكتروني" required>
+                    <label data-i18n="emailLabel">📧 البريد الإلكتروني</label>
+                    <input type="email" id="regEmail" data-i18n-placeholder="emailPlaceholder" placeholder="أدخل بريدك الإلكتروني" required>
                 </div>
                 <div class="form-group">
-                    <label>🔑 كلمة المرور</label>
+                    <label data-i18n="passwordLabel">🔑 كلمة المرور</label>
                     <input type="password" id="regPassword" placeholder="اختر كلمة مرور قوية" required minlength="6">
                 </div>
                 <div class="form-group">
-                    <label>🔑 تأكيد كلمة المرور</label>
-                    <input type="password" id="regConfirmPassword" placeholder="أعد إدخال كلمة المرور" required>
+                    <label data-i18n="confirmPasswordLabel">🔑 تأكيد كلمة المرور</label>
+                    <input type="password" id="regConfirmPassword" data-i18n-placeholder="confirmPasswordPlaceholder" placeholder="أعد إدخال كلمة المرور" required>
                 </div>
-                <button type="submit" class="login-btn">إنشاء حساب</button>
+                <button type="submit" class="login-btn" data-i18n="registerButton">إنشاء حساب</button>
             </form>
 
             <!-- Demo Info -->
             <div class="demo-info">
-                <h4>ℹ️ معلومات الحسابات التجريبية</h4>
-                <p>البريد: <code>admin@xpmc.xyz</code></p>
-                <p>كلمة المرور: <code>admin123</code></p>
+                <h4 data-i18n="demoInfoTitle">ℹ️ معلومات الحسابات التجريبية</h4>
+                <p><span data-i18n="demoEmail">البريد:</span> <code>admin@xpmc.xyz</code></p>
+                <p><span data-i18n="demoPassword">كلمة المرور:</span> <code>admin123</code></p>
             </div>
 
             <!-- Discord Support -->
             <div class="discord-support">
-                <p>❓ هل واجهتك مشكلة في التسجيل؟</p>
+                <p data-i18n="supportTitle">❓ هل واجهتك مشكلة في التسجيل؟</p>
                 <a href="https://discord.gg/ksceUxcd" target="_blank" class="discord-link">
-                    <span>💬</span> تواصل معنا عبر الديسكورد
+                    <span>💬</span> <span data-i18n="discordSupport">تواصل معنا عبر الديسكورد</span>
                 </a>
             </div>
         </div>
