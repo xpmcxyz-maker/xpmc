@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="متجر رتب XPMC - اشتري رتبك واستمتع في السيرفر">
     <meta name="keywords" content="Minecraft, Server, XPMC, رتب, متجر">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://cdn-icons-png.flaticon.com;">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://cdn-icons-png.flaticon.com; connect-src https://api.mcsrvstat.us;">
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
@@ -17,7 +17,7 @@
     <script src="auth.js"></script>
     <script src="lang.js"></script>
     <script src="script.js"></script>
-    <script>loadLanguage();</script>
+    <script>loadLanguage(); initPlayerCountUpdates();</script>
 </head>
 <body>
 
@@ -43,12 +43,18 @@
     <div class="server-status-bar">
         <div class="status-item server-status">
             <span class="status-label" data-i18n="serverStatus">حالة السيرفر:</span>
-            <span class="status-value online" data-i18n="online">🟢 اونلاين</span>
+            <span class="status-value" id="java-status">🟢 Online</span>
         </div>
         <div class="status-item players-count">
-            <span class="status-icon">👥</span>
-            <span class="status-label" data-i18n="playersCount">عدد اللاعبين:</span>
-            <span class="status-value">25/250</span>
+            <span class="status-icon">🟤</span>
+            <span class="status-label">Java:</span>
+            <span class="status-value" id="javaPlayers">0/0</span>
+        </div>
+        <div class="status-item players-count">
+            <span class="status-icon">📱</span>
+            <span class="status-label">Bedrock:</span>
+            <span class="status-value" id="bedrock-status">⚪ Offline</span>
+            <span class="status-value" id="bedrockPlayers">0/0</span>
         </div>
     </div>
 

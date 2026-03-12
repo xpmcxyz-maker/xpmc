@@ -173,15 +173,105 @@ function toggleMobileMenu() {
     }
 }
 
-// Close mobile menu when clicking on a link
-document.addEventListener('click', function(e) {
-    const navLinks = document.getElementById('navLinks');
-    const menuToggle = document.querySelector('.menu-toggle');
-    
-    if (navLinks && navLinks.classList.contains('show')) {
-        if (!navLinks.contains(e.target) && !menuToggle.contains(e.target)) {
-            navLinks.classList.remove('show');
-            menuToggle.classList.remove('active');
-        }
+// Minecraft Server Player Count - MCSrvStat.us API
+const SERVER_CONFIG = {
+    java: {
+        host: 'xpmc.xyz',
+        port: 50907
+    },
+    bedrock: {
+        host: 'xpmc.xyz',
+        port: 50908
     }
-});
+};
+
+// Fetch player count from MCSrvStat.us API
+async function fetchPlayerCount(type) {
+    const config = SERVER_CONFIG[type];
+    const url = `https://api.mcsrvstat.us/2/${config.host}:${config.port}`;
+    
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+        
+        if (data.online) {
+            const players = data.players?.online || 0;
+            const maxPlayers = data.players?.max || 0;
+            return { online: true, players, maxPlayers };
+        } else {
+            return { online: false, players: 0, maxPlayers: 0 };
+        }
+    } catch (error) {
+        console.error(`Error fetching ${type} server status:`, error);
+        return { online: false, players: 0, maxPlayers: 0, error: true };
+    }
+}
+
+// Update player count display on the page
+async function updatePlayerCounts() {
+    // Update Java server
+    try {
+        const javaResponse = await fetch('https://api.mcsrvstat.us/2/xpmc.xyz:50907');
+        const javaData = await javaResponse.json();
+        const javaOnline = javaData.players ? javaData.players.online : 0;
+        const javaMax = javaData.players ? javaData.players.max : 0;
+        
+        const javaStatus = document.getElementById('java-status');
+        const javaPlayers = document.getElementById('javaPlayers');
+        
+        if (javaData.online) {
+            javaStatus.innerHTML = '🟢 Online';
+            javaStatus.className = 'status-value online';
+            javaPlayers.innerText = javaOnline + ' / ' + javaMax;
+        } else {
+            javaStatus.innerHTML = '🔴 Offline';
+            javaStatus.className = 'status-value offline';
+            javaPlayers.innerText = '0 / 0';
+        }
+    } catch (err) {
+        console.log('Java API error:', err);
+        const javaStatus = document.getElementById('java-status');
+        const javaPlayers = document.getElementById('javaPlayers');
+        javaStatus.innerHTML = '❓ Unknown';
+        javaStatus.className = 'status-value offline';
+        javaPlayers.innerText = '? / ?';
+    }
+    
+    // Update Bedrock server
+    try {
+        const bedrockResponse = await fetch('https://api.mcsrvstat.us/2/xpmc.xyz:50908');
+        const bedrockData = await bedrockResponse.json();
+        const bedrockOnline = bedrockData.players ? bedrockData.players.online : 0;
+        const bedrockMax = bedrockData.players ? bedrockData.players.max : 0;
+        
+        const bedrockStatus = document.getElementById('bedrock-status');
+        const bedrockPlayers = document.getElementById('bedrockPlayers');
+        
+        if (bedrockData.online) {
+            bedrockStatus.innerHTML = '🟢 Online';
+            bedrockStatus.className = 'status-value online';
+            bedrockPlayers.innerText = bedrockOnline + ' / ' + bedrockMax;
+        } else {
+            bedrockStatus.innerHTML = '🔴 Offline';
+            bedrockStatus.className = 'status-value offline';
+            bedrockPlayers.innerText = '0 / 0';
+        }
+    } catch (err) {
+        console.log('Bedrock API error:', err);
+        const bedrockStatus = document.getElementById('bedrock-status');
+        const bedrockPlayers = document.getElementById('bedrockPlayers');
+        bedrockStatus.innerHTML = '❓ Unknown';
+        bedrockStatus.className = 'status-value offline';
+        bedrockPlayers.innerText = '? / ?';
+    }
+}
+
+// Initialize player count updates
+function initPlayerCountUpdates() {
+    // Update immediately on page load
+    updatePlayerCounts();
+    
+    // Then update every 30 seconds
+    setInterval(updatePlayerCounts, 30000);
+}
+
