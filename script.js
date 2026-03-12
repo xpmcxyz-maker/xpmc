@@ -236,34 +236,6 @@ async function updatePlayerCounts() {
         javaStatus.className = 'status-value offline';
         javaPlayers.innerText = '? / ?';
     }
-    
-    // Update Bedrock server
-    try {
-        const bedrockResponse = await fetch('https://api.mcsrvstat.us/2/xpmc.xyz:50908');
-        const bedrockData = await bedrockResponse.json();
-        const bedrockOnline = bedrockData.players ? bedrockData.players.online : 0;
-        const bedrockMax = bedrockData.players ? bedrockData.players.max : 0;
-        
-        const bedrockStatus = document.getElementById('bedrock-status');
-        const bedrockPlayers = document.getElementById('bedrockPlayers');
-        
-        if (bedrockData.online) {
-            bedrockStatus.innerHTML = '🟢 Online';
-            bedrockStatus.className = 'status-value online';
-            bedrockPlayers.innerText = bedrockOnline + ' / ' + bedrockMax;
-        } else {
-            bedrockStatus.innerHTML = '🔴 Offline';
-            bedrockStatus.className = 'status-value offline';
-            bedrockPlayers.innerText = '0 / 0';
-        }
-    } catch (err) {
-        console.log('Bedrock API error:', err);
-        const bedrockStatus = document.getElementById('bedrock-status');
-        const bedrockPlayers = document.getElementById('bedrockPlayers');
-        bedrockStatus.innerHTML = '❓ Unknown';
-        bedrockStatus.className = 'status-value offline';
-        bedrockPlayers.innerText = '? / ?';
-    }
 }
 
 // Initialize player count updates
